@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOLTERRA — Sports Footwear</title>
+<style>
+:root{
+  --black:#111;
+  --dark:#1a1a1a;
+  --gray:#6b7280;
+  --light:#f5f5f3;
+  --white:#fff;
+  --line:#e7e7e5;
+  --accent:#dfff00;
+  --danger:#dc2626;
+  --shadow:0 15px 45px rgba(0,0,0,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:#fff;color:var(--black);line-height:1.5}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+img{display:block;width:100%}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{max-width:1400px;margin:auto;height:76px;padding:0 28px;display:flex;align-items:center;gap:30px}
+.logo{font-size:25px;font-weight:950;letter-spacing:4px}
+.logo span{color:#777}
+.navlinks{display:flex;gap:23px;align-items:center;flex:1}
+.navlinks a{font-size:13px;font-weight:700;letter-spacing:.4px}
+.navlinks a:hover{text-decoration:underline}
+.actions{display:flex;gap:9px}
+.iconbtn{width:42px;height:42px;border:0;background:transparent;border-radius:50%;font-size:19px;position:relative}
+.iconbtn:hover{background:var(--light)}
+.badge{position:absolute;right:1px;top:1px;background:var(--black);color:#fff;width:17px;height:17px;border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center}
+.menu{display:none}
+
+/* HERO */
+.hero{min-height:620px;background:#151515;color:#fff;position:relative;overflow:hidden;display:flex;align-items:center}
+.hero:before{content:"";position:absolute;width:650px;height:650px;border-radius:50%;background:var(--accent);right:-170px;top:-180px;opacity:.9}
+.hero-content{max-width:1400px;width:100%;margin:auto;padding:90px 28px;position:relative;z-index:2}
+.kicker{font-size:13px;letter-spacing:4px;font-weight:800;margin-bottom:18px}
+.hero h1{font-size:clamp(48px,8vw,105px);line-height:.9;max-width:850px;letter-spacing:-5px;margin-bottom:28px}
+.hero p{max-width:520px;color:#d0d0d0;font-size:17px;margin-bottom:32px}
+.btn{border:0;padding:15px 23px;font-weight:800;letter-spacing:.4px;border-radius:4px;transition:.2s}
+.btn-dark{background:#fff;color:#111}
+.btn-dark:hover{transform:translateY(-2px)}
+.btn-accent{background:var(--accent);color:#111}
+.btn-black{background:#111;color:#fff}
+.btn-outline{background:#fff;border:1px solid #ccc}
+.hero-shoe{position:absolute;right:7%;bottom:50px;width:min(530px,42vw);transform:rotate(-12deg);filter:drop-shadow(0 30px 25px rgba(0,0,0,.5));z-index:1}
+
+/* SECTIONS */
+section{padding:80px 28px}
+.container{max-width:1400px;margin:auto}
+.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:30px;gap:20px}
+.section-head h2{font-size:38px;letter-spacing:-1.5px}
+.section-head p{color:var(--gray);font-size:14px}
+.categories{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.category{min-height:180px;background:var(--light);padding:22px;display:flex;flex-direction:column;justify-content:end;position:relative;overflow:hidden}
+.category:nth-child(even){background:#e9ece8}
+.category .num{font-size:12px;color:#777;position:absolute;top:18px}
+.category h3{font-size:24px}
+.category:hover h3{text-decoration:underline}
+
+/* PRODUCTS */
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{position:relative;min-width:0}
+.card-image{aspect-ratio:1/1;background:#f1f1ef;position:relative;overflow:hidden}
+.card-image img{height:100%;object-fit:cover;transition:.45s}
+.card:hover .card-image img{transform:scale(1.045)}
+.tag{position:absolute;left:12px;top:12px;background:#fff;padding:6px 9px;font-size:10px;font-weight:900;letter-spacing:.6px;z-index:2}
+.heart{position:absolute;right:12px;top:12px;width:37px;height:37px;border:0;border-radius:50%;background:#fff;z-index:3;font-size:17px}
+.heart.active{color:#e11}
+.card-info{padding:13px 2px}
+.brand{font-size:10px;color:#777;font-weight:800;letter-spacing:1px}
+.card h3{font-size:16px;margin:3px 0}
+.meta{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#777}
+.price{font-weight:900;color:#111;font-size:15px}
+.old{text-decoration:line-through;color:#999;font-weight:400;margin-right:5px}
+.stars{color:#111;letter-spacing:1px}
+
+/* TECHNOLOGY */
+.tech{background:#111;color:#fff}
+.tech-grid{display:grid;grid-template-columns:1.1fr 1.9fr;gap:70px;align-items:center}
+.tech h2{font-size:55px;line-height:1;letter-spacing:-3px}
+.tech p{color:#bbb;margin-top:18px}
+.tech-list{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#333}
+.tech-item{background:#111;padding:28px;min-height:150px}
+.tech-item b{font-size:18px}
+.tech-item p{font-size:13px}
+
+/* SHOP */
+.shop-controls{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.searchbox{flex:1;min-width:230px;border:1px solid #ddd;padding:13px 15px;border-radius:4px}
+.select{border:1px solid #ddd;background:#fff;padding:13px 14px;border-radius:4px;min-width:160px}
+
+/* DRAWERS/MODALS */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.48);z-index:200;display:none}
+.overlay.show{display:block}
+.modal{position:fixed;z-index:210;background:#fff;display:none}
+.modal.show{display:block}
+.product-modal{inset:5% 5%;overflow:auto}
+.modal-close{position:absolute;right:18px;top:18px;border:0;background:#fff;font-size:25px;z-index:5}
+.product-detail{display:grid;grid-template-columns:1.05fr 1fr;min-height:100%}
+.detail-image{background:#f2f2f0;display:flex;align-items:center;justify-content:center;padding:40px}
+.detail-image img{max-height:650px;object-fit:cover}
+.detail-info{padding:60px 55px}
+.detail-info .brand{font-size:12px}
+.detail-info h2{font-size:45px;line-height:1.02;margin:10px 0 12px}
+.detail-desc{color:#666;margin:20px 0 25px}
+.option-title{font-size:12px;font-weight:900;margin:20px 0 10px;text-transform:uppercase;letter-spacing:1px}
+.swatches,.sizes{display:flex;flex-wrap:wrap;gap:8px}
+.swatch{width:32px;height:32px;border-radius:50%;border:2px solid #fff;outline:1px solid #ccc}
+.size{border:1px solid #ccc;background:#fff;padding:11px 14px;min-width:52px}
+.size.selected{background:#111;color:#fff;border-color:#111}
+.size:disabled{opacity:.3;text-decoration:line-through;cursor:not-allowed}
+.qty{display:flex;align-items:center;border:1px solid #ddd;width:max-content}
+.qty button{border:0;background:#fff;width:40px;height:40px;font-size:18px}
+.qty span{width:40px;text-align:center;font-weight:800}
+.detail-actions{display:flex;gap:10px;margin-top:25px}
+.detail-actions .btn{flex:1}
+
+/* CART */
+.cart{right:0;top:0;height:100%;width:min(470px,100%);padding:25px;overflow:auto}
+.cart-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd;padding-bottom:18px}
+.cart-items{padding:15px 0}
+.cart-item{display:grid;grid-template-columns:75px 1fr auto;gap:12px;padding:13px 0;border-bottom:1px solid #eee}
+.cart-item img{width:75px;height:75px;object-fit:cover;background:#f3f3f3}
+.cart-item h4{font-size:13px}
+.cart-item p{font-size:12px;color:#777}
+.cart-item .remove{border:0;background:none;color:#999}
+.cart-summary{border-top:1px solid #ddd;padding-top:18px}
+.sumrow{display:flex;justify-content:space-between;margin:8px 0;font-size:14px}
+.total{font-size:21px;font-weight:900;margin-top:15px}
+.full{width:100%;margin-top:15px}
+
+/* CHECKOUT */
+.checkout{inset:4% 7%;overflow:auto;padding:40px}
+.checkout-grid{display:grid;grid-template-columns:1.5fr .8fr;gap:45px}
+.checkout h2{font-size:35px;margin-bottom:25px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:13px}
+.field.full-field{grid-column:1/-1}
+.field label{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.6px}
+.field input,.field select{border:1px solid #d6d6d6;padding:13px;border-radius:3px}
+.payment{border:1px solid #ddd;padding:15px;margin-top:8px}
+.order-box{background:#f6f6f4;padding:25px;height:max-content}
+.order-line{display:flex;justify-content:space-between;gap:15px;margin:10px 0;font-size:13px}
+.order-total{font-size:22px;font-weight:900;border-top:1px solid #ddd;padding-top:15px;margin-top:15px}
+
+/* CONFIRM */
+.confirm{inset:10% 25%;padding:60px;text-align:center}
+.check{width:70px;height:70px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:35px;margin:0 auto 20px}
+.confirm h2{font-size:40px}
+
+/* FOOTER */
+footer{background:#111;color:#fff;padding:65px 28px 25px}
+.footer-grid{max-width:1400px;margin:auto;display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:50px}
+footer h4{margin-bottom:15px}
+footer a,footer p{display:block;color:#aaa;font-size:13px;margin:8px 0}
+.copyright{max-width:1400px;margin:50px auto 0;padding-top:20px;border-top:1px solid #333;color:#777;font-size:11px}
+
+/* TOAST */
+.toast{position:fixed;right:22px;bottom:22px;background:#111;color:#fff;padding:14px 18px;border-radius:4px;z-index:500;transform:translateY(120px);opacity:0;transition:.3s;font-size:13px}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  .navlinks{display:none}.menu{display:block}.nav{justify-content:space-between}
+  .hero-shoe{opacity:.35;width:55vw;right:-5%}
+  .categories{grid-template-columns:repeat(3,1fr)}
+  .products{grid-template-columns:repeat(3,1fr)}
+  .tech-grid{grid-template-columns:1fr}
+  .product-detail{grid-template-columns:1fr}
+  .detail-image{min-height:420px}
+  .checkout-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:650px){
+  section{padding:55px 16px}.nav{padding:0 16px;height:65px}.logo{font-size:20px}
+  .actions .hide-mobile{display:none}
+  .hero{min-height:590px}.hero-content{padding:65px 18px}.hero h1{font-size:54px;letter-spacing:-3px}
+  .hero p{font-size:14px}.hero-shoe{width:90vw;right:-25%;bottom:30px}
+  .categories{grid-template-columns:1fr 1fr}.category{min-height:145px}.category h3{font-size:19px}
+  .section-head{align-items:start;flex-direction:column}.section-head h2{font-size:30px}
+  .products{grid-template-columns:1fr 1fr;gap:14px}.card h3{font-size:13px}
+  .meta{font-size:10px}.price{font-size:13px}
+  .tech h2{font-size:43px}.tech-list{grid-template-columns:1fr}
+  .product-modal{inset:0}.detail-info{padding:30px 20px}.detail-info h2{font-size:34px}
+  .detail-image{min-height:330px;padding:20px}
+  .form-grid{grid-template-columns:1fr}.field.full-field{grid-column:auto}
+  .checkout{inset:0;padding:25px 18px}.confirm{inset:5% 4%;padding:45px 20px}.confirm h2{font-size:30px}
+  .footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <button class="iconbtn menu" onclick="toggleMenu()">☰</button>
+    <a class="logo" href="#" onclick="goHome()">VOLTERRA<span>.</span></a>
+    <div class="navlinks" id="navlinks">
+      <a href="#" onclick="goHome()">HOME</a>
+      <a href="#shop" onclick="closeMobile()">SHOP</a>
+      <a href="#shop" onclick="filterCategory('Running')">RUNNING</a>
+      <a href="#shop" onclick="filterCategory('Training')">TRAINING</a>
+      <a href="#shop" onclick="filterCategory('Basketball')">BASKETBALL</a>
+      <a href="#shop" onclick="filterCategory('Football')">FOOTBALL</a>
+      <a href="#shop" onclick="filterCategory('Outdoor')">OUTDOOR</a>
+      <a href="#shop" onclick="filterCategory('Lifestyle')">LIFESTYLE</a>
+    </div>
+    <div class="actions">
+      <button class="iconbtn" onclick="focusSearch()">⌕</button>
+      <button class="iconbtn hide-mobile" onclick="showWishlist()">♡<span class="badge" id="wishCount">0</span></button>
+      <button class="iconbtn" onclick="showCart()">🛒<span class="badge" id="cartCount">0</span></button>
+    </div>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-content">
+    <div class="kicker">VOLTERRA PERFORMANCE FOOTWEAR</div>
+    <h1>MOVE.<br>PERFORM.<br>GO BEYOND.</h1>
+    <p>Engineered for every stride, every training session and every challenge. Discover performance footwear designed to keep you moving.</p>
+    <button class="btn btn-accent" onclick="document.getElementById('shop').scrollIntoView()">SHOP NOW →</button>
+  </div>
+  <img class="hero-shoe" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=85" alt="VOLTERRA sports shoe">
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div><p class="kicker" style="color:#777">EXPLORE</p><h2>SHOP BY SPORT</h2></div>
+      <p>Performance footwear for every movement.</p>
+    </div>
+    <div class="categories">
+      <a class="category" href="#shop" onclick="filterCategory('Running')"><span class="num">01</span><h3>Running →</h3></a>
+      <a class="category" href="#shop" onclick="filterCategory('Training')"><span class="num">02</span><h3>Training →</h3></a>
+      <a class="category" href="#shop" onclick="filterCategory('Basketball')"><span class="num">03</span><h3>Basketball →</h3></a>
+      <a class="category" href="#shop" onclick="filterCategory('Football')"><span class="num">04</span><h3>Football →</h3></a>
+      <a class="category" href="#shop" onclick="filterCategory('Outdoor')"><span class="num">05</span><h3>Outdoor →</h3></a>
+    </div>
+  </div>
+</section>
+
+<section id="featured" style="padding-top:20px">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="kicker" style="color:#777">LATEST</p><h2>NEW ARRIVALS</h2></div>
+      <a href="#shop" onclick="clearFilters()">View all →</a>
+    </div>
+    <div class="products" id="newProducts"></div>
+  </div>
+</section>
+
+<section class="tech">
+  <div class="container tech-grid">
+    <div>
+      <p class="kicker">VOLTERRA TECHNOLOGY</p>
+      <h2>ENGINEERED FOR PERFORMANCE.</h2>
+      <p>Every component is designed around movement, comfort, traction and confidence.</p>
+    </div>
+    <div class="tech-list">
+      <div class="tech-item"><b>AEROFOAM™</b><p>Lightweight cushioning for responsive everyday movement.</p></div>
+      <div class="tech-item"><b>FLEXCORE™</b><p>Flexible movement system for natural transitions.</p></div>
+      <div class="tech-item"><b>GRIPMAX™</b><p>High-traction outsole designed for confident footing.</p></div>
+      <div class="tech-item"><b>BREATHFLOW™</b><p>Breathable upper construction for improved airflow.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="shop">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="kicker" style="color:#777">THE COLLECTION</p><h2>SHOP VOLTERRA</h2></div>
+      <p id="resultCount"></p>
+    </div>
+    <div class="shop-controls">
+      <input class="searchbox" id="searchInput" placeholder="Search shoes, categories or sport..." oninput="renderShop()">
+      <select class="select" id="categoryFilter" onchange="renderShop()">
+        <option value="">All Categories</option>
+        <option>Running</option><option>Training</option><option>Basketball</option>
+        <option>Football</option><option>Outdoor</option><option>Lifestyle</option>
+      </select>
+      <select class="select" id="genderFilter" onchange="renderShop()">
+        <option value="">All Genders</option><option>Men</option><option>Women</option><option>Unisex</option>
+      </select>
+      <select class="select" id="priceFilter" onchange="renderShop()">
+        <option value="">All Prices</option><option value="200">Below RM200</option>
+        <option value="299">RM200–RM299</option><option value="399">RM300–RM399</option>
+        <option value="499">RM400–RM499</option><option value="500">RM500+</option>
+      </select>
+      <select class="select" id="sortFilter" onchange="renderShop()">
+        <option value="featured">Featured</option><option value="newest">Newest</option>
+        <option value="sales">Best Selling</option><option value="low">Price Low to High</option>
+        <option value="high">Price High to Low</option><option value="rating">Highest Rated</option>
+      </select>
+    </div>
+    <div class="products" id="shopProducts"></div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div><p class="kicker" style="color:#777">MOST LOVED</p><h2>BEST SELLERS</h2></div>
+    </div>
+    <div class="products" id="bestProducts"></div>
+  </div>
+</section>
+
+<section style="background:#f5f5f3">
+  <div class="container" style="text-align:center;max-width:850px">
+    <p class="kicker">BUILT TO MOVE</p>
+    <h2 style="font-size:clamp(35px,6vw,65px);line-height:1;letter-spacing:-3px">YOUR NEXT MOVE STARTS HERE.</h2>
+    <p style="color:#666;margin:20px auto 25px">VOLTERRA was created for people who refuse to stand still. From everyday training to high-performance movement, every shoe is designed around comfort, confidence and motion.</p>
+    <button class="btn btn-black" onclick="document.getElementById('shop').scrollIntoView()">EXPLORE COLLECTION</button>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="logo">VOLTERRA<span>.</span></div><p style="margin-top:15px;max-width:290px">Performance footwear engineered for movement. Demo e-commerce experience.</p></div>
+    <div><h4>SHOP</h4><a href="#shop" onclick="filterCategory('Running')">Running</a><a href="#shop" onclick="filterCategory('Training')">Training</a><a href="#shop" onclick="filterCategory('Basketball')">Basketball</a><a href="#shop" onclick="filterCategory('Football')">Football</a><a href="#shop" onclick="filterCategory('Outdoor')">Outdoor</a></div>
+    <div><h4>SUPPORT</h4><a href="#" onclick="showSizeGuide()">Size Guide</a><a href="#" onclick="showToast('Shipping: RM8 standard / RM15 express')">Shipping</a><a href="#" onclick="showToast('Returns available within 14 days in this demo.')">Returns</a><a href="#" onclick="showToast('Contact: support@volterra.demo')">Contact Us</a></div>
+    <div><h4>STAY AHEAD</h4><p>Get product updates and exclusive offers.</p><div style="display:flex;margin-top:10px"><input id="newsletter" placeholder="Your email" style="padding:12px;border:0;width:100%"><button class="btn btn-accent" onclick="subscribe()">→</button></div></div>
+  </div>
+  <div class="copyright">© 2026 VOLTERRA. Demo e-commerce website. All product names, technologies and brand assets are fictional.</div>
+</footer>
+
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+<div class="modal product-modal" id="productModal">
+  <button class="modal-close" onclick="closeAll()">×</button>
+  <div class="product-detail" id="productDetail"></div>
+</div>
+
+<aside class="modal cart" id="cartModal">
+  <div class="cart-head"><h2>YOUR CART</h2><button class="iconbtn" onclick="closeAll()">×</button></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-summary" id="cartSummary"></div>
+</aside>
+
+<div class="modal checkout" id="checkoutModal">
+  <button class="modal-close" onclick="closeAll()">×</button>
+  <div class="checkout-grid">
+    <div>
+      <p class="kicker" style="color:#777">CHECKOUT</p>
+      <h2>Complete your order</h2>
+      <form id="checkoutForm" onsubmit="placeOrder(event)">
+        <div class="form-grid">
+          <div class="field"><label>Full Name</label><input required placeholder="Your name"></div>
+          <div class="field"><label>Phone Number</label><input required placeholder="01X-XXXXXXX"></div>
+          <div class="field full-field"><label>Email</label><input type="email" required placeholder="you@email.com"></div>
+          <div class="field full-field"><label>Address</label><input required placeholder="Street address"></div>
+          <div class="field"><label>Postcode</label><input required placeholder="43000"></div>
+          <div class="field"><label>City</label><input required placeholder="City"></div>
+          <div class="field full-field"><label>State</label><select required><option value="">Select state</option><option>Johor</option><option>Kedah</option><option>Kelantan</option><option>Melaka</option><option>Negeri Sembilan</option><option>Pahang</option><option>Perak</option><option>Perlis</option><option>Pulau Pinang</option><option>Sabah</option><option>Sarawak</option><option>Selangor</option><option>Terengganu</option><option>Kuala Lumpur</option><option>Putrajaya</option><option>Labuan</option></select></div>
+        </div>
+        <h3 style="margin-top:25px">Delivery</h3>
+        <div class="payment"><label><input type="radio" name="delivery" value="8" checked onchange="updateCheckout()"> Standard Delivery — RM8 (3–5 working days)</label></div>
+        <div class="payment"><label><input type="radio" name="delivery" value="15" onchange="updateCheckout()"> Express Delivery — RM15 (1–2 working days)</label></div>
+        <h3 style="margin-top:25px">Payment</h3>
+        <div class="payment"><label><input type="radio" name="payment" checked> Credit / Debit Card <small>(Demo)</small></label></div>
+        <div class="payment"><label><input type="radio" name="payment"> Online Banking <small>(Demo)</small></label></div>
+        <div class="payment"><label><input type="radio" name="payment"> E-Wallet <small>(Demo)</small></label></div>
+        <div class="payment"><label><input type="radio" name="payment"> Cash on Delivery</label></div>
+        <button class="btn btn-black full" type="submit">PLACE DEMO ORDER →</button>
+      </form>
+    </div>
+    <div class="order-box">
+      <h3>ORDER SUMMARY</h3>
+      <div id="checkoutItems"></div>
+      <div class="order-line"><span>Subtotal</span><b id="coSubtotal">RM0</b></div>
+      <div class="order-line"><span>Discount</span><b id="coDiscount">RM0</b></div>
+      <div class="order-line"><span>Shipping</span><b id="coShipping">RM8</b></div>
+      <div class="order-total"><span>Total</span><span id="coTotal">RM0</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal confirm" id="confirmModal">
+  <div class="check">✓</div>
+  <p class="kicker">ORDER CONFIRMED</p>
+  <h2>Thank you for your order.</h2>
+  <p id="confirmText" style="color:#666;margin:15px 0 25px"></p>
+  <button class="btn btn-black" onclick="closeAll();goHome()">CONTINUE SHOPPING</button>
+</div>
+
+<div class="modal confirm" id="wishlistModal">
+  <button class="modal-close" onclick="closeAll()">×</button>
+  <p class="kicker">SAVED PRODUCTS</p><h2>WISHLIST</h2>
+  <div class="products" id="wishlistItems" style="margin-top:25px"></div>
+</div>
+
+<div class="modal confirm" id="sizeModal">
+  <button class="modal-close" onclick="closeAll()">×</button>
+  <p class="kicker">VOLTERRA FIT</p><h2>SIZE GUIDE</h2>
+  <p style="color:#666;margin:15px 0">Use your usual EU footwear size as a starting point. For performance shoes, wear the socks you normally train in and allow approximately a thumb's width in front of your toes.</p>
+  <table style="width:100%;border-collapse:collapse;margin-top:20px;text-align:left">
+    <tr><th style="padding:10px;border-bottom:1px solid #ddd">EU</th><th style="padding:10px;border-bottom:1px solid #ddd">Foot Length</th></tr>
+    <tr><td style="padding:10px">38</td><td style="padding:10px">24.0 cm</td></tr>
+    <tr><td style="padding:10px">39</td><td style="padding:10px">24.7 cm</td></tr>
+    <tr><td style="padding:10px">40</td><td style="padding:10px">25.3 cm</td></tr>
+    <tr><td style="padding:10px">41</td><td style="padding:10px">26.0 cm</td></tr>
+    <tr><td style="padding:10px">42</td><td style="padding:10px">26.7 cm</td></tr>
+    <tr><td style="padding:10px">43</td><td style="padding:10px">27.3 cm</td></tr>
+    <tr><td style="padding:10px">44</td><td style="padding:10px">28.0 cm</td></tr>
+    <tr><td style="padding:10px">45</td><td style="padding:10px">28.7 cm</td></tr>
+  </table>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const img1="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85";
+const img2="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=900&q=85";
+const img3="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=900&q=85";
+const img4="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=900&q=85";
+const img5="https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=900&q=85";
+
+const products=[
+{id:1,name:"AeroRun X1",cat:"Running",sub:"Road Running",gender:"Unisex",price:299,old:349,rating:4.8,sales:980,new:true,best:true,color:["#111","#eee","#d33"],sizes:[38,39,40,41,42,43,44],img:img1,desc:"Lightweight daily running shoe built for smooth road miles and responsive comfort.",tech:"AEROFOAM™ • FLEXCORE™"},
+{id:2,name:"AeroRun Pro",cat:"Running",sub:"Racing",gender:"Unisex",price:449,old:499,rating:4.9,sales:870,new:true,best:true,color:["#222","#e9e9e9"],sizes:[39,40,41,42,43,44],img:img2,desc:"Responsive performance racer for runners who want speed without sacrificing comfort.",tech:"AEROFOAM™ • CARBON RESPONSE"},
+{id:3,name:"Velocity 2",cat:"Running",sub:"Daily Running",gender:"Men",price:259,old:299,rating:4.7,sales:760,new:true,best:true,color:["#145","#fff"],sizes:[39,40,41,42,43,44,45],img:img3,desc:"Balanced cushioning and breathable construction for everyday training.",tech:"BREATHFLOW™ • AEROFOAM™"},
+{id:4,name:"Sprint Max",cat:"Running",sub:"Performance",gender:"Women",price:329,old:379,rating:4.8,sales:650,new:true,best:false,color:["#d35","#222"],sizes:[36,37,38,39,40,41,42],img:img4,desc:"Light, fast and flexible performance shoe for tempo runs and speed sessions.",tech:"FLEXCORE™ • GRIPMAX™"},
+{id:5,name:"TrailForce 1",cat:"Outdoor",sub:"Trail Running",gender:"Unisex",price:379,old:429,rating:4.7,sales:590,new:true,best:true,color:["#364","#222"],sizes:[38,39,40,41,42,43,44,45],img:img5,desc:"Trail-ready grip and protection for changing outdoor terrain.",tech:"GRIPMAX™ • STABILITYLOCK™"},
+{id:6,name:"TrailForce Pro",cat:"Outdoor",sub:"Trail Running",gender:"Men",price:499,old:559,rating:4.9,sales:520,new:false,best:true,color:["#222","#874"],sizes:[40,41,42,43,44,45],img:img1,desc:"Premium trail performance with enhanced stability and traction.",tech:"GRIPMAX™ • STABILITYLOCK™"},
+{id:7,name:"Urban Motion",cat:"Lifestyle",sub:"Sports Lifestyle",gender:"Unisex",price:219,old:259,rating:4.6,sales:490,new:true,best:false,color:["#eee","#111"],sizes:[38,39,40,41,42,43,44],img:img2,desc:"Everyday sports lifestyle comfort with a clean athletic silhouette.",tech:"AEROFOAM™"},
+{id:8,name:"StreetFlex",cat:"Lifestyle",sub:"Casual Sneakers",gender:"Women",price:239,old:279,rating:4.7,sales:440,new:true,best:false,color:["#f4a","#fff"],sizes:[36,37,38,39,40,41],img:img3,desc:"Flexible casual sneaker for daily city movement.",tech:"FLEXCORE™"},
+{id:9,name:"PowerTrain X",cat:"Training",sub:"Gym Training",gender:"Men",price:289,old:329,rating:4.8,sales:610,new:true,best:true,color:["#111","#d22"],sizes:[39,40,41,42,43,44,45],img:img4,desc:"Stable training platform designed for lifting, conditioning and gym sessions.",tech:"STABILITYLOCK™ • GRIPMAX™"},
+{id:10,name:"GymCore",cat:"Training",sub:"Fitness",gender:"Women",price:269,old:309,rating:4.7,sales:530,new:false,best:true,color:["#a36","#222"],sizes:[36,37,38,39,40,41],img:img5,desc:"Comfortable cross-training shoe built for dynamic fitness sessions.",tech:"FLEXCORE™ • BREATHFLOW™"},
+{id:11,name:"CourtRise",cat:"Basketball",sub:"Performance",gender:"Unisex",price:399,old:459,rating:4.8,sales:710,new:true,best:true,color:["#111","#f90"],sizes:[39,40,41,42,43,44,45],img:img1,desc:"Responsive court shoe with lateral support for quick basketball movement.",tech:"STABILITYLOCK™ • GRIPMAX™"},
+{id:12,name:"DunkForce",cat:"Basketball",sub:"Performance",gender:"Men",price:429,old:489,rating:4.9,sales:680,new:false,best:true,color:["#fff","#111"],sizes:[40,41,42,43,44,45],img:img2,desc:"High-response basketball performance shoe for explosive movement.",tech:"AEROFOAM™ • GRIPMAX™"},
+{id:13,name:"Football Strike",cat:"Football",sub:"Training",gender:"Unisex",price:359,old:399,rating:4.6,sales:460,new:true,best:false,color:["#0a5","#fff"],sizes:[39,40,41,42,43,44],img:img3,desc:"Football training shoe designed for confident control and traction.",tech:"GRIPMAX™"},
+{id:14,name:"SpeedBoot X",cat:"Football",sub:"Football Boots",gender:"Men",price:489,old:549,rating:4.8,sales:580,new:true,best:true,color:["#e33","#111"],sizes:[40,41,42,43,44,45],img:img4,desc:"Lightweight football boot for speed-focused players.",tech:"GRIPMAX™ • FLEXCORE™"},
+{id:15,name:"Mountain X",cat:"Outdoor",sub:"Hiking",gender:"Unisex",price:419,old:469,rating:4.7,sales:390,new:false,best:false,color:["#765","#222"],sizes:[38,39,40,41,42,43,44,45],img:img5,desc:"Supportive outdoor shoe for hikes, trails and weekend adventures.",tech:"STABILITYLOCK™ • GRIPMAX™"},
+{id:16,name:"Outdoor Pro",cat:"Outdoor",sub:"Outdoor Performance",gender:"Men",price:459,old:519,rating:4.8,sales:420,new:true,best:false,color:["#333","#a65"],sizes:[40,41,42,43,44,45],img:img1,desc:"Durable outdoor performance with dependable grip and stability.",tech:"GRIPMAX™ • BREATHFLOW™"},
+{id:17,name:"Active One",cat:"Training",sub:"Cross Training",gender:"Unisex",price:229,old:269,rating:4.6,sales:350,new:false,best:false,color:["#eee","#08c"],sizes:[38,39,40,41,42,43,44],img:img2,desc:"Versatile everyday training shoe for active lifestyles.",tech:"FLEXCORE™"},
+{id:18,name:"Motion Elite",cat:"Running",sub:"Performance",gender:"Unisex",price:389,old:439,rating:4.8,sales:510,new:true,best:false,color:["#222","#c60"],sizes:[39,40,41,42,43,44],img:img3,desc:"Premium performance trainer balancing cushioning and response.",tech:"AEROFOAM™ • FLEXCORE™"},
+{id:19,name:"Carbon Racer",cat:"Running",sub:"Racing",gender:"Unisex",price:599,old:699,rating:4.9,sales:310,new:true,best:true,color:["#111","#ddd"],sizes:[39,40,41,42,43,44],img:img4,desc:"Elite racing concept with highly responsive propulsion.",tech:"CARBON RESPONSE • AEROFOAM™"},
+{id:20,name:"Performance Max",cat:"Training",sub:"Performance",gender:"Men",price:349,old:399,rating:4.8,sales:470,new:false,best:true,color:["#111","#0a5"],sizes:[40,41,42,43,44,45],img:img5,desc:"All-round performance trainer for demanding sessions.",tech:"STABILITYLOCK™ • FLEXCORE™"}
+];
+
+let cart=JSON.parse(localStorage.getItem("volterraCart")||"[]");
+let wishlist=JSON.parse(localStorage.getItem("volterraWishlist")||"[]");
+let discount=0;
+let selectedProduct=null,selectedSize=null,selectedColor=null,detailQty=1;
+
+function money(n){return "RM"+Number(n).toFixed(2)}
+function save(){localStorage.setItem("volterraCart",JSON.stringify(cart));localStorage.setItem("volterraWishlist",JSON.stringify(wishlist));updateBadges()}
+function updateBadges(){
+ document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);
+ document.getElementById("wishCount").textContent=wishlist.length;
+}
+function stars(r){return "★★★★★"}
+function card(p){
+ const wished=wishlist.includes(p.id);
+ return `<article class="card">
+ <div class="card-image">
+  ${p.new?'<span class="tag">NEW</span>':p.best?'<span class="tag">BEST SELLER</span>':''}
+  <button class="heart ${wished?'active':''}" onclick="toggleWish(${p.id},event)">${wished?'♥':'♡'}</button>
+  <img src="${p.img}" alt="${p.name}" loading="lazy" onclick="openProduct(${p.id})">
+ </div>
+ <div class="card-info" onclick="openProduct(${p.id})">
+  <div class="brand">VOLTERRA</div><h3>${p.name}</h3>
+  <div class="meta"><span>${p.cat}</span><span class="stars">${stars(p.rating)} ${p.rating}</span></div>
+  <div style="margin-top:5px"><span class="price">${money(p.price)}</span> <span class="old">${money(p.old)}</span></div>
+ </div>
+ </article>`;
+}
+function renderHome(){
+ document.getElementById("newProducts").innerHTML=products.filter(p=>p.new).slice(0,4).map(card).join("");
+ document.getElementById("bestProducts").innerHTML=[...products].sort((a,b)=>b.sales-a.sales).slice(0,4).map(card).join("");
+}
+function renderShop(){
+ const q=(document.getElementById("searchInput").value||"").toLowerCase();
+ const cat=document.getElementById("categoryFilter").value;
+ const gender=document.getElementById("genderFilter").value;
+ const price=document.getElementById("priceFilter").value;
+ const sort=document.getElementById("sortFilter").value;
+ let arr=products.filter(p=>{
+  const search=!q||`${p.name} ${p.cat} ${p.sub} ${p.gender}`.toLowerCase().includes(q);
+  const c=!cat||p.cat===cat, g=!gender||p.gender===gender;
+  let pr=true;
+  if(price==="200")pr=p.price<200;
+  if(price==="299")pr=p.price>=200&&p.price<=299;
+  if(price==="399")pr=p.price>=300&&p.price<=399;
+  if(price==="499")pr=p.price>=400&&p.price<=499;
+  if(price==="500")pr=p.price>=500;
+  return search&&c&&g&&pr;
+ });
+ if(sort==="newest")arr.sort((a,b)=>Number(b.new)-Number(a.new));
+ if(sort==="sales")arr.sort((a,b)=>b.sales-a.sales);
+ if(sort==="low")arr.sort((a,b)=>a.price-b.price);
+ if(sort==="high")arr.sort((a,b)=>b.price-a.price);
+ if(sort==="rating")arr.sort((a,b)=>b.rating-a.rating);
+ document.getElementById("shopProducts").innerHTML=arr.length?arr.map(card).join():`<div style="grid-column:1/-1;text-align:center;padding:70px;color:#777">No products found. Try another search or filter.</div>`;
+ document.getElementById("resultCount").textContent=`${arr.length} products`;
+}
+function filterCategory(cat){
+ document.getElementById("categoryFilter").value=cat;
+ document.getElementById("searchInput").value="";
+ document.getElementById("genderFilter").value="";
+ document.getElementById("priceFilter").value="";
+ document.getElementById("sortFilter").value="featured";
+ setTimeout(()=>document.getElementById("shop").scrollIntoView({behavior:"smooth"}),20);
+ renderShop();
+ closeMobile();
+}
+function clearFilters(){
+ document.getElementById("categoryFilter").value="";
+ document.getElementById("searchInput").value="";
+ document.getElementById("genderFilter").value="";
+ document.getElementById("priceFilter").value="";
+ document.getElementById("sortFilter").value="featured";
+ renderShop();
+}
+function openProduct(id){
+ selectedProduct=products.find(p=>p.id===id);selectedSize=null;selectedColor=selectedProduct.color[0];detailQty=1;
+ const p=selectedProduct;
+ document.getElementById("productDetail").innerHTML=`
+ <div class="detail-image"><img src="${p.img}" alt="${p.name}"></div>
+ <div class="detail-info">
+  <div class="brand">VOLTERRA • ${p.cat.toUpperCase()}</div>
+  <h2>${p.name}</h2>
+  <div class="stars">${stars(p.rating)} <span style="color:#777;font-size:13px">${p.rating} (${Math.round(p.sales/7)} reviews)</span></div>
+  <div style="font-size:26px;font-weight:900;margin-top:15px">${money(p.price)} <span class="old" style="font-size:15px">${money(p.old)}</span></div>
+  <p class="detail-desc">${p.desc}</p>
+  <div class="option-title">Colour</div><div class="swatches">${p.color.map((c,i)=>`<button class="swatch" style="background:${c}" onclick="selectColor('${c}',this)" title="Colour ${i+1}"></button>`).join("")}</div>
+  <div class="option-title">Size — EU</div><div class="sizes">${[36,37,38,39,40,41,42,43,44,45].map(s=>`<button class="size" ${p.sizes.includes(s)?"":"disabled"} onclick="selectSize(${s},this)">${s}</button>`).join("")}</div>
+  <div class="option-title">Quantity</div><div class="qty"><button onclick="changeDetailQty(-1)">−</button><span id="detailQty">1</span><button onclick="changeDetailQty(1)">+</button></div>
+  <p style="font-size:12px;color:#777;margin-top:14px">${p.tech}</p>
+  <div class="detail-actions"><button class="btn btn-black" onclick="addSelectedToCart()">ADD TO CART</button><button class="btn btn-accent" onclick="buyNow()">BUY NOW</button></div>
+  <button class="btn btn-outline full" onclick="showSizeGuide()">SIZE GUIDE</button>
+ </div>`;
+ show("productModal");
+}
+function selectSize(s,el){selectedSize=s;document.querySelectorAll(".size").forEach(x=>x.classList.remove("selected"));el.classList.add("selected")}
+function selectColor(c,el){selectedColor=c;document.querySelectorAll(".swatch").forEach(x=>x.style.outlineColor="#ccc");el.style.outlineColor="#111"}
+function changeDetailQty(d){detailQty=Math.max(1,detailQty+d);document.getElementById("detailQty").textContent=detailQty}
+function addSelectedToCart(){
+ if(!selectedSize){showToast("Please select a size.");return}
+ addCart(selectedProduct.id,selectedSize,selectedColor,detailQty);closeAll();showToast(`${selectedProduct.name} added to cart.`);
+}
+function buyNow(){
+ if(!selectedSize){showToast("Please select a size.");return}
+ addCart(selectedProduct.id,selectedSize,selectedColor,detailQty);closeAll();openCheckout();
+}
+function addCart(id,size,color,qty=1){
+ const key=`${id}-${size}-${color}`;
+ const existing=cart.find(x=>x.key===key);
+ if(existing)existing.qty+=qty;else cart.push({key,id,size,color,qty});
+ save();
+}
+function toggleWish(id,e){
+ if(e)e.stopPropagation();
+ if(wishlist.includes(id))wishlist=wishlist.filter(x=>x!==id);else wishlist.push(id);
+ save();renderHome();renderShop();showToast(wishlist.includes(id)?"Added to wishlist":"Removed from wishlist");
+}
+function showCart(){renderCart();show("cartModal")}
+function renderCart(){
+ const el=document.getElementById("cartItems");
+ if(!cart.length){el.innerHTML=`<div style="text-align:center;padding:60px 10px;color:#777">Your cart is empty.<br><button class="btn btn-black" style="margin-top:18px" onclick="closeAll();document.getElementById('shop').scrollIntoView()">SHOP SHOES</button></div>`;document.getElementById("cartSummary").innerHTML="";return}
+ el.innerHTML=cart.map((x,i)=>{const p=products.find(p=>p.id===x.id);return `<div class="cart-item">
+ <img src="${p.img}" alt="${p.name}">
+ <div><h4>${p.name}</h4><p>Size EU ${x.size} • Qty ${x.qty}</p><b>${money(p.price*x.qty)}</b><div style="margin-top:7px"><button class="btn btn-outline" style="padding:5px 9px" onclick="changeCart(${i},-1)">−</button> <button class="btn btn-outline" style="padding:5px 9px" onclick="changeCart(${i},1)">+</button></div></div>
+ <button class="remove" onclick="removeCart(${i})">×</button></div>`}).join("");
+ const sub=cartTotal();
+ document.getElementById("cartSummary").innerHTML=`<div class="sumrow"><span>Subtotal</span><b>${money(sub)}</b></div><div class="sumrow"><span>Shipping</span><b>${sub>=200?"FREE":money(8)}</b></div><div class="sumrow total"><span>Total</span><span>${money(sub+(sub>=200?0:8))}</span></div><button class="btn btn-black full" onclick="openCheckout()">PROCEED TO CHECKOUT →</button><p style="font-size:11px;color:#888;text-align:center;margin-top:12px">Free standard shipping over RM200.</p>`;
+}
+function cartTotal(){return cart.reduce((s,x)=>{const p=products.find(p=>p.id===x.id);return s+p.price*x.qty},0)}
+function changeCart(i,d){cart[i].qty=Math.max(1,cart[i].qty+d);save();renderCart()}
+function removeCart(i){cart.splice(i,1);save();renderCart();showToast("Item removed from cart.")}
+function openCheckout(){
+ if(!cart.length){showToast("Your cart is empty.");return}
+ closeAll();updateCheckout();show("checkoutModal");
+}
+function updateCheckout(){
+ const sub=cartTotal(), shipRadio=document.querySelector('input[name="delivery"]:checked'), ship=shipRadio?Number(shipRadio.value):8;
+ document.getElementById("checkoutItems").innerHTML=cart.map(x=>{const p=products.find(p=>p.id===x.id);return `<div class="order-line"><span>${p.name} × ${x.qty}</span><b>${money(p.price*x.qty)}</b></div>`}).join("");
+ document.getElementById("coSubtotal").textContent=money(sub);
+ document.getElementById("coDiscount").textContent=discount?`-${money(sub*discount)}`:money(0);
+ const actualShip=sub>=200?0:ship;
+ document.getElementById("coShipping").textContent=actualShip?money(actualShip):"FREE";
+ document.getElementById("coTotal").textContent=money(sub-(sub*discount)+actualShip);
+}
+function placeOrder(e){
+ e.preventDefault();
+ const id="VT-"+new Date().toISOString().slice(0,10).replaceAll("-","")+"-"+Math.floor(100+Math.random()*900);
+ const total=document.getElementById("coTotal").textContent;
+ localStorage.setItem("volterraLastOrder",JSON.stringify({id,total,date:new Date().toISOString()}));
+ cart=[];discount=0;save();closeAll();
+ document.getElementById("confirmText").innerHTML=`Order number: <b>${id}</b><br>Total: <b>${total}</b><br><br>Estimated delivery: 3–5 working days.<br><small>This is a demo order. No real payment was processed.</small>`;
+ show("confirmModal");
+}
+function showWishlist(){
+ const arr=products.filter(p=>wishlist.includes(p.id));
+ document.getElementById("wishlistItems").innerHTML=arr.length?arr.map(card).join():`<div style="grid-column:1/-1;color:#777;padding:30px">Your wishlist is empty.</div>`;
+ show("wishlistModal");
+}
+function showSizeGuide(){closeAll();show("sizeModal")}
+function subscribe(){const v=document.getElementById("newsletter").value;if(!v){showToast("Enter your email first.");return}showToast("Subscribed successfully — demo.");document.getElementById("newsletter").value=""}
+function focusSearch(){document.getElementById("shop").scrollIntoView({behavior:"smooth"});setTimeout(()=>document.getElementById("searchInput").focus(),500)}
+function show(id){document.getElementById("overlay").classList.add("show");document.getElementById(id).classList.add("show")}
+function closeAll(){document.getElementById("overlay").classList.remove("show");document.querySelectorAll(".modal").forEach(x=>x.classList.remove("show"))}
+function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove("show"),2600)}
+function goHome(){window.scrollTo({top:0,behavior:"smooth"});closeMobile()}
+function toggleMenu(){document.getElementById("navlinks").style.display=document.getElementById("navlinks").style.display==="flex"?"":"flex"}
+function closeMobile(){if(innerWidth<=1000)document.getElementById("navlinks").style.display=""}
+window.addEventListener("keydown",e=>{if(e.key==="Escape")closeAll()});
+renderHome();renderShop();updateBadges();
+</script>
+</body>
+</html>
